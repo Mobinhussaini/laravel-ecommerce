@@ -1,4 +1,5 @@
-import { ProductsDataTable } from '@/components/products-data-table';
+
+import ProductsDataTable from '@/components/dashboard/projects-data-table';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';

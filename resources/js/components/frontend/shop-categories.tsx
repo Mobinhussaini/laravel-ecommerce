@@ -10,6 +10,7 @@ interface CategoryItem {
     slug: string;
     image: string;
     color: string;
+    darkColor: string;
 }
 
 export default function ShopCategories() {
@@ -35,6 +36,7 @@ export default function ShopCategories() {
             slug: 'beauty-fragrance',
             image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-amber-50',
+            darkColor: 'bg-amber-900/20',
         },
         {
             id: 2,
@@ -42,6 +44,7 @@ export default function ShopCategories() {
             slug: 'electronics',
             image: 'https://images.unsplash.com/photo-166202691159-5558e9949346?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-gray-100',
+            darkColor: 'bg-gray-800/30',
         },
         {
             id: 3,
@@ -49,6 +52,7 @@ export default function ShopCategories() {
             slug: 'health-personal',
             image: 'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-sky-50',
+            darkColor: 'bg-sky-900/20',
         },
         {
             id: 4,
@@ -56,6 +60,7 @@ export default function ShopCategories() {
             slug: 'mens-fashion',
             image: 'https://images.unsplash.com/photo-1516257984-b1b4d707412e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-blue-50',
+            darkColor: 'bg-blue-900/20',
         },
         {
             id: 5,
@@ -63,6 +68,7 @@ export default function ShopCategories() {
             slug: 'sports-outdoors',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-purple-50',
+            darkColor: 'bg-purple-900/20',
         },
         {
             id: 6,
@@ -70,6 +76,7 @@ export default function ShopCategories() {
             slug: 'womens-fashion',
             image: 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-indigo-50',
+            darkColor: 'bg-indigo-900/20',
         },
         {
             id: 7,
@@ -77,6 +84,7 @@ export default function ShopCategories() {
             slug: 'automotive',
             image: 'https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-blue-50',
+            darkColor: 'bg-blue-900/20',
         },
         {
             id: 8,
@@ -84,6 +92,7 @@ export default function ShopCategories() {
             slug: 'health-nutrition',
             image: 'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-sky-50',
+            darkColor: 'bg-sky-900/20',
         },
         {
             id: 9,
@@ -91,6 +100,7 @@ export default function ShopCategories() {
             slug: 'kids-fashion',
             image: 'https://images.unsplash.com/photo-1543854608-fbb5c5c8a307?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-violet-50',
+            darkColor: 'bg-violet-900/20',
         },
         {
             id: 10,
@@ -98,6 +108,7 @@ export default function ShopCategories() {
             slug: 'refurbished',
             image: 'https://images.unsplash.com/photo-1603706585128-8d096bea0021?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-blue-50',
+            darkColor: 'bg-blue-900/20',
         },
         {
             id: 11,
@@ -105,6 +116,7 @@ export default function ShopCategories() {
             slug: 'stationary-books-media',
             image: 'https://images.unsplash.com/photo-1599204606395-ede983886ce9?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-amber-50',
+            darkColor: 'bg-amber-900/20',
         },
         {
             id: 12,
@@ -112,6 +124,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1586683086816-c674f6bb3c69?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 13,
@@ -119,6 +132,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 14,
@@ -126,6 +140,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 15,
@@ -133,6 +148,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 16,
@@ -140,6 +156,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 17,
@@ -147,6 +164,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 18,
@@ -154,6 +172,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 19,
@@ -161,6 +180,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 20,
@@ -168,6 +188,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
         {
             id: 21,
@@ -175,6 +196,7 @@ export default function ShopCategories() {
             slug: 'baby',
             image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
             color: 'bg-teal-50',
+            darkColor: 'bg-teal-900/20',
         },
     ];
 
@@ -258,26 +280,26 @@ export default function ShopCategories() {
     };
 
     return (
-        <div className="relative w-full overflow-hidden border-y border-amber-100/50 bg-gradient-to-b from-amber-50/70 to-amber-50/30 px-4 py-8 md:px-8">
+        <div className="relative w-full overflow-hidden border-y border-amber-100/50 bg-gradient-to-b from-amber-50/70 to-amber-50/30 px-4 py-8 md:px-8 dark:border-gray-800/50 dark:from-gray-900/90 dark:to-gray-900">
             <div className="mx-auto max-w-7xl">
                 {/* Decorative elements */}
-                <div className="absolute top-0 left-0 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-200/20 blur-3xl"></div>
-                <div className="absolute right-0 bottom-0 h-40 w-40 translate-x-1/3 translate-y-1/3 rounded-full bg-amber-300/10 blur-3xl"></div>
+                <div className="absolute top-0 left-0 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-200/20 blur-3xl dark:bg-amber-600/10"></div>
+                <div className="absolute right-0 bottom-0 h-40 w-40 translate-x-1/3 translate-y-1/3 rounded-full bg-amber-300/10 blur-3xl dark:bg-amber-600/5"></div>
 
                 <div className={`mb-8 flex items-center justify-between transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                     <div>
                         <div className="flex items-center">
-                            <div className="mr-3 h-8 w-1.5 rounded-full bg-amber-500"></div>
-                            <h2 className="text-xl font-bold text-gray-800 md:text-2xl">Shop by Category</h2>
+                            <div className="mr-3 h-8 w-1.5 rounded-full bg-amber-500 dark:bg-amber-400"></div>
+                            <h2 className="text-xl font-bold text-gray-800 md:text-2xl dark:text-white">Shop by Category</h2>
                         </div>
-                        <p className="mt-1 ml-4 text-sm text-gray-500">Explore our premium collections</p>
+                        <p className="mt-1 ml-4 text-sm text-gray-500 dark:text-gray-400">Explore our premium collections</p>
                     </div>
 
                     <div className="flex space-x-3">
                         <button
                             onClick={goToPrev}
                             disabled={sliding}
-                            className="rounded-full border border-amber-200 bg-white p-2.5 text-gray-600 shadow-sm transition-all hover:scale-105 hover:border-amber-300 hover:bg-amber-50 active:scale-95 disabled:opacity-50"
+                            className="rounded-full border border-amber-200 bg-white p-2.5 text-gray-600 shadow-sm transition-all hover:scale-105 hover:border-amber-300 hover:bg-amber-50 active:scale-95 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-amber-600 dark:hover:bg-gray-700"
                             aria-label="Previous categories"
                         >
                             <ChevronLeft className="h-5 w-5" />
@@ -285,7 +307,7 @@ export default function ShopCategories() {
                         <button
                             onClick={goToNext}
                             disabled={sliding}
-                            className="rounded-full border border-amber-200 bg-white p-2.5 text-gray-600 shadow-sm transition-all hover:scale-105 hover:border-amber-300 hover:bg-amber-50 active:scale-95 disabled:opacity-50"
+                            className="rounded-full border border-amber-200 bg-white p-2.5 text-gray-600 shadow-sm transition-all hover:scale-105 hover:border-amber-300 hover:bg-amber-50 active:scale-95 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-amber-600 dark:hover:bg-gray-700"
                             aria-label="Next categories"
                         >
                             <ChevronRight className="h-5 w-5" />
@@ -313,8 +335,7 @@ export default function ShopCategories() {
                             {visibleCategories().map((category, idx) => (
                                 <Link
                                     key={category.id}
-                                    // href={`/category/${category.slug}`}
-                                    href='/product-details'
+                                    href="/product-details"
                                     className="group flex flex-col items-center"
                                     onMouseEnter={() => setHoveredCategory(category.id)}
                                     onMouseLeave={() => setHoveredCategory(null)}
@@ -324,12 +345,14 @@ export default function ShopCategories() {
                                     }}
                                 >
                                     <div
-                                        className={`aspect-square w-full overflow-hidden rounded-full ${category.color} p-1.5 ${
-                                            hoveredCategory === category.id ? 'ring-opacity-50 shadow-md ring-2 ring-amber-300' : 'shadow-sm'
+                                        className={`aspect-square w-full overflow-hidden rounded-full ${category.color} p-1.5 dark:${category.darkColor} ${
+                                            hoveredCategory === category.id
+                                                ? 'ring-opacity-50 shadow-md ring-2 ring-amber-300 dark:ring-amber-500/50'
+                                                : 'shadow-sm'
                                         } transform transition-all duration-300 ${hoveredCategory === category.id ? 'scale-105' : ''}`}
                                     >
-                                        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white">
-                                            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-black/10"></div>
+                                        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white dark:bg-gray-800">
+                                            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-black/10 dark:from-gray-800/0 dark:via-gray-800/0 dark:to-black/20"></div>
                                             <img
                                                 src={category.image}
                                                 alt={category.name}
@@ -338,7 +361,7 @@ export default function ShopCategories() {
                                         </div>
                                     </div>
                                     <div className="mt-3 text-center">
-                                        <h3 className="line-clamp-2 text-xs font-medium text-gray-800 transition-colors group-hover:text-amber-700 sm:text-sm">
+                                        <h3 className="line-clamp-2 text-xs font-medium text-gray-800 transition-colors group-hover:text-amber-700 sm:text-sm dark:text-gray-200 dark:group-hover:text-amber-400">
                                             {category.name}
                                         </h3>
                                     </div>
@@ -356,8 +379,8 @@ export default function ShopCategories() {
                             onClick={() => goToPage(index)}
                             className={`h-2.5 rounded-full transition-all duration-300 ${
                                 activeIndex === index
-                                    ? 'w-10 bg-gradient-to-r from-amber-400 to-amber-500 shadow-sm'
-                                    : 'w-2.5 bg-gray-200 hover:bg-amber-200'
+                                    ? 'w-10 bg-gradient-to-r from-amber-400 to-amber-500 shadow-sm dark:from-amber-500 dark:to-amber-600'
+                                    : 'w-2.5 bg-gray-200 hover:bg-amber-200 dark:bg-gray-700 dark:hover:bg-amber-700/50'
                             }`}
                             aria-label={`Go to page ${index + 1}`}
                             aria-current={activeIndex === index ? 'true' : 'false'}
@@ -372,7 +395,7 @@ export default function ShopCategories() {
                 >
                     <Link
                         href="/categories"
-                        className="inline-flex items-center rounded-full border border-amber-200 bg-white px-6 py-2.5 text-amber-700 shadow-sm transition-all hover:scale-105 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-800 hover:shadow active:scale-95"
+                        className="inline-flex items-center rounded-full border border-amber-200 bg-white px-6 py-2.5 text-amber-700 shadow-sm transition-all hover:scale-105 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-800 hover:shadow active:scale-95 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-400 dark:hover:border-amber-600 dark:hover:bg-gray-700 dark:hover:text-amber-300"
                     >
                         <span className="font-medium">View All Categories</span>
                         <ChevronRight className="ml-1 h-4 w-4" />

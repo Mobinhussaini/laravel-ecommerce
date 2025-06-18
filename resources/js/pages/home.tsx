@@ -1,6 +1,7 @@
 import ProductList from '@/components/frontend/product-list';
 import ShopBanner from '@/components/frontend/shop-banner';
-import ShopCategories from '@/components/frontend/shop-categories';
+import ShopCategoriesIcons  from '@/components/frontend/shop-categories';
+import ShopCategories from '@/components/frontend/shop-categories-icons';
 import ShopFrontLayout from '@/layouts/shop-front-layout';
 import ProductDetails from './product-details';
 
@@ -11,6 +12,7 @@ const Home = () => {
                 <ShopBanner />
                 <div className="py-16">
                     <ShopCategories />
+                    <ShopCategoriesIcons />
                 </div>
                 <div className='py-12'>
                     <ProductList />

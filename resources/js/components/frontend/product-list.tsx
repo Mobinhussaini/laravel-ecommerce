@@ -114,14 +114,14 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
             {[...Array(5)].map((_, i) => (
                 <svg
                     key={i}
-                    className={`h-3 w-3 ${i < Math.floor(rating) ? 'text-amber-400' : i < rating ? 'text-amber-400' : 'text-gray-300'}`}
+                    className={`h-3 w-3 ${i < Math.floor(rating) ? 'text-amber-400' : i < rating ? 'text-amber-400' : 'text-gray-300 dark:text-gray-600'}`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                 >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
                 </svg>
             ))}
-            <span className="ml-1 text-xs text-gray-600">{rating.toFixed(1)}</span>
+            <span className="ml-1 text-xs text-gray-600 dark:text-gray-400">{rating.toFixed(1)}</span>
         </div>
     );
 };
@@ -133,9 +133,9 @@ const ProductCard: React.FC<{
     onAddToCart: (id: string) => void;
 }> = ({ product, onFavoriteToggle, onAddToCart }) => {
     return (
-        <div className="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
+        <div className="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-800 dark:hover:shadow-gray-900/50">
             {/* Image container with aspect ratio */}
-            <div className="relative w-full overflow-hidden bg-gray-50 pb-[100%]">
+            <div className="relative w-full overflow-hidden bg-gray-50 pb-[100%] dark:bg-gray-700">
                 <img
                     src={product.image}
                     alt={product.name}
@@ -159,17 +159,17 @@ const ProductCard: React.FC<{
                 <div className="absolute top-3 right-3">
                     <button
                         onClick={() => onFavoriteToggle(product.id)}
-                        className="bg-opacity-90 hover:bg-opacity-100 mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm transition-all duration-200"
+                        className="bg-opacity-90 hover:bg-opacity-100 mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm transition-all duration-200 dark:bg-gray-800"
                         aria-label="Add to favorites"
                     >
-                        <Heart size={16} className={product.favorite ? 'fill-red-500 text-red-500' : 'text-gray-700'} />
+                        <Heart size={16} className={product.favorite ? 'fill-red-500 text-red-500' : 'text-gray-700 dark:text-gray-300'} />
                     </button>
                 </div>
 
                 {/* Quick actions overlay */}
                 <div className="bg-opacity-20 absolute inset-0 flex items-center justify-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="flex translate-y-4 transform gap-2 transition-transform duration-300 group-hover:translate-y-0">
-                        <button className="flex items-center gap-1 rounded-lg bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-md transition-colors duration-200 hover:bg-gray-100">
+                        <button className="flex items-center gap-1 rounded-lg bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-md transition-colors duration-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700">
                             <Eye size={16} />
                             <span>Quick View</span>
                         </button>
@@ -180,32 +180,30 @@ const ProductCard: React.FC<{
             {/* Product details */}
             <div className="flex flex-grow flex-col p-4">
                 <div className="mb-1">
-                    <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">{product.category}</span>
-                    <h3 className="mt-1 line-clamp-1 text-sm font-medium text-gray-900">{product.name}</h3>
+                    <span className="text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">{product.category}</span>
+                    <h3 className="mt-1 line-clamp-1 text-sm font-medium text-gray-900 dark:text-white">{product.name}</h3>
                 </div>
 
                 <div className="mt-1 mb-3">
                     <StarRating rating={product.rating} />
                 </div>
 
-                <p className="mb-3 line-clamp-2 text-xs text-gray-500">{product.description}</p>
+                <p className="mb-3 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">{product.description}</p>
 
-                <div className="mt-auto flex items-end justify-between border-t border-gray-100 pt-3">
+                <div className="mt-auto flex items-end justify-between border-t border-gray-100 pt-3 dark:border-gray-700">
                     <div className="flex flex-col">
-                        <span className="text-xs text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
+                        <span className="text-xs text-gray-500 line-through dark:text-gray-400">${product.originalPrice.toFixed(2)}</span>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-lg font-bold text-gray-900">${product.discountPrice.toFixed(2)}</span>
-                            {/* <span className="text-xs font-medium text-red-500">
-                Save $
-                {(product.originalPrice - product.discountPrice).toFixed(2)}
-              </span> */}
+                            <span className="text-lg font-bold text-gray-900 dark:text-white">${product.discountPrice.toFixed(2)}</span>
                         </div>
                     </div>
 
                     <button
                         onClick={() => onAddToCart(product.id)}
                         className={`flex items-center gap-1 rounded-lg px-3 py-2 shadow-sm transition-all duration-200 ${
-                            product.inCart ? 'border border-green-200 bg-green-50 text-green-600' : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                            product.inCart
+                                ? 'border border-green-200 bg-green-50 text-green-600 dark:border-green-800 dark:bg-green-900/30 dark:text-green-400'
+                                : 'bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800'
                         }`}
                     >
                         <ShoppingCart size={16} />
@@ -275,36 +273,36 @@ const ProductList = () => {
     }, [currentIndex, products.length, visibleProducts]);
 
     return (
-        <div className="mx-auto w-full max-w-7xl bg-gradient-to-b from-gray-50 to-white px-4 py-8">
+        <div className="mx-auto w-full max-w-7xl bg-gradient-to-b from-gray-50 to-white px-4 py-8 dark:from-gray-900 dark:to-gray-800">
             <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
                 <div>
-                    <div className="mb-2 inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold tracking-wide text-red-600">
+                    <div className="mb-2 inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold tracking-wide text-red-600 dark:bg-red-900/30 dark:text-red-400">
                         SPECIAL OFFERS
                     </div>
-                    <h2 className="flex items-center gap-2 text-3xl font-bold text-gray-900">
-                        <Tag className="text-red-500" size={24} />
+                    <h2 className="flex items-center gap-2 text-3xl font-bold text-gray-900 dark:text-white">
+                        <Tag className="text-red-500 dark:text-red-400" size={24} />
                         <span className="relative">
                             Spring Sale Collection
-                            <span className="absolute right-0 -bottom-2 left-0 h-1 rounded-full bg-red-500"></span>
+                            <span className="absolute right-0 -bottom-2 left-0 h-1 rounded-full bg-red-500 dark:bg-red-400"></span>
                         </span>
                     </h2>
-                    <p className="mt-2 text-gray-500">Exclusive deals on premium products. Limited time only.</p>
+                    <p className="mt-2 text-gray-500 dark:text-gray-400">Exclusive deals on premium products. Limited time only.</p>
                 </div>
 
                 <div className="flex space-x-3">
                     <button
                         onClick={goToPrev}
-                        className="rounded-full border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow"
+                        className="rounded-full border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600"
                         aria-label="Previous products"
                     >
-                        <ChevronLeft size={18} className="text-gray-700" />
+                        <ChevronLeft size={18} className="text-gray-700 dark:text-gray-300" />
                     </button>
                     <button
                         onClick={goToNext}
-                        className="rounded-full border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow"
+                        className="rounded-full border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600"
                         aria-label="Next products"
                     >
-                        <ChevronRight size={18} className="text-gray-700" />
+                        <ChevronRight size={18} className="text-gray-700 dark:text-gray-300" />
                     </button>
                 </div>
             </div>
@@ -333,7 +331,9 @@ const ProductList = () => {
                         key={i}
                         onClick={() => setCurrentIndex(i)}
                         className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                            i === currentIndex ? 'w-6 bg-red-500' : 'bg-gray-300 hover:bg-gray-400'
+                            i === currentIndex
+                                ? 'w-6 bg-red-500 dark:bg-red-400'
+                                : 'bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500'
                         }`}
                         aria-label={`Go to slide ${i + 1}`}
                     />
@@ -342,7 +342,7 @@ const ProductList = () => {
 
             {/* View all button */}
             <div className="mt-8 flex justify-center">
-                <button className="rounded-lg border-2 border-gray-900 px-6 py-2 font-medium text-gray-900 transition-colors duration-300 hover:bg-gray-900 hover:text-white">
+                <button className="rounded-lg border-2 border-gray-900 px-6 py-2 font-medium text-gray-900 transition-colors duration-300 hover:bg-gray-900 hover:text-white dark:border-gray-300 dark:text-white dark:hover:bg-gray-300 dark:hover:text-gray-900">
                     View All Sales
                 </button>
             </div>
