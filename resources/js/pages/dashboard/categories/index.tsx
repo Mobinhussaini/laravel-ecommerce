@@ -1,6 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import CatgoriesDataTable from '@/components/dashboard/categories-data-table';
 
 const breadcrumbs: BreadcrumbItem [] =[
     {
@@ -14,7 +15,7 @@ const Categories = () => {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Products" />
             <div className='flex h-full flex-1 flex-col gap-4 rounded-xl p-4'>
-                <h2>This is the Category page11111111!</h2>
+                <CatgoriesDataTable />
             </div>
         </AppLayout>
     );

@@ -1,5 +1,6 @@
 'use client';
 import { Product } from '@/types/product';
+import { Link } from '@inertiajs/react';
 import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart, Tag } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -169,10 +170,10 @@ const ProductCard: React.FC<{
                 {/* Quick actions overlay */}
                 <div className="bg-opacity-20 absolute inset-0 flex items-center justify-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="flex translate-y-4 transform gap-2 transition-transform duration-300 group-hover:translate-y-0">
-                        <button className="flex items-center gap-1 rounded-lg bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-md transition-colors duration-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700">
+                        <Link href={route('product.details')} className="flex items-center gap-1 rounded-lg bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-md transition-colors duration-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700">
                             <Eye size={16} />
                             <span>Quick View</span>
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

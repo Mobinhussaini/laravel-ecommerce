@@ -330,7 +330,7 @@ export default function ProductsDataTable() {
             <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-2xl font-bold tracking-tight">Inventory Items</h2>
+                        <h2 className="text-2xl font-bold tracking-tight">Products List</h2>
                         <p className="text-sm text-muted-foreground">
                             {data.length} items | Total Value: USD {formattedTotalValue}
                         </p>

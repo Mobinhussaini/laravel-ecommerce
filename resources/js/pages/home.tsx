@@ -1,20 +1,21 @@
 import ProductList from '@/components/frontend/product-list';
 import ShopBanner from '@/components/frontend/shop-banner';
-import ShopCategoriesIcons  from '@/components/frontend/shop-categories';
-import ShopCategories from '@/components/frontend/shop-categories-icons';
+import ShopCategories from '@/components/frontend/shop-categories';
 import ShopFrontLayout from '@/layouts/shop-front-layout';
-import ProductDetails from './product-details';
+import { CategoryItem } from '@/types/categories';
 
-const Home = () => {
+const Home = ({ categories }: { categories: CategoryItem[] }) => {
+
+    console.log("CATEGORIES: ",categories);
+
     return (
         <ShopFrontLayout>
             <div className="h-full w-full">
                 <ShopBanner />
                 <div className="py-16">
-                    <ShopCategories />
-                    <ShopCategoriesIcons />
+                    <ShopCategories categories={categories} />
                 </div>
-                <div className='py-12'>
+                <div className="py-12">
                     <ProductList />
                 </div>
             </div>

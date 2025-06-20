@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Shop\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'get_home_data'])->name('home');
 
 Route::get('/product-details', function () {
     return Inertia::render('product-details');
@@ -23,6 +23,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard/categories', function () {
         return Inertia::render('dashboard/categories/index');
     })->name('categories.index');
+    Route::post('dashboard/categories',
+            [CategoryController::class, 'save_category'])
+        ->name('categories.insert');
 });
 
 require __DIR__ . '/settings.php';
