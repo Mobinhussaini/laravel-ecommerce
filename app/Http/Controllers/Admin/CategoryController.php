@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -36,5 +37,13 @@ class CategoryController extends Controller
         Category::create($new_category);
 
         return redirect('/dashboard/categories');
+    }
+
+    public function list_categories(){
+        $categories = Category::latest()->get();
+
+        return Inertia::render("dashboard/categories/index", [
+            'categories'=> $categories
+        ]);
     }
 }

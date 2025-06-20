@@ -33,7 +33,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-import { CreateCategoryItem } from '@/types/categories';
+import { CategoryItem, CreateCategoryItem } from '@/types/categories';
 import { Link, router, useForm } from '@inertiajs/react';
 import * as XLSX from 'xlsx';
 import { DropzoneFileInput } from '../form-inputs/image-uploads';
@@ -227,7 +227,7 @@ export const columns: ColumnDef<Product>[] = [
     },
 ];
 
-export default function CatgoriesDataTable() {
+export default function CatgoriesDataTable({categories}:{categories:CategoryItem[]}) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -236,6 +236,8 @@ export default function CatgoriesDataTable() {
     const [showAddDialog, setShowAddDialog] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [images, setImages] = useState([]);
+
+    console.log("CATEGORIES LIST: ", categories)
 
     const table = useReactTable({
         data: category,

@@ -20,9 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard/products/index');
     })->name('products.index');
 
-    Route::get('dashboard/categories', function () {
-        return Inertia::render('dashboard/categories/index');
-    })->name('categories.index');
+    Route::get('dashboard/categories', [CategoryController::class, 'list_categories'])->name('categories.index');
+
     Route::post('dashboard/categories',
             [CategoryController::class, 'save_category'])
         ->name('categories.insert');
