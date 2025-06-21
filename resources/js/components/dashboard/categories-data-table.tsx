@@ -51,84 +51,87 @@ export type Product = {
     status: 'in-stock' | 'out-stock';
 };
 
-const category: Product[] = [
-    {
-        id: 'prod-001',
-        name: 'Wireless Headphones',
-        category: 'Electronics',
-        salesCount: 342,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 56,
-        price: 129.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-002',
-        name: 'Smart Watch',
-        category: 'Electronics',
-        salesCount: 189,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 23,
-        price: 249.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-003',
-        name: 'Yoga Mat',
-        category: 'Fitness',
-        salesCount: 421,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 0,
-        price: 39.99,
-        status: 'out-stock',
-    },
-    {
-        id: 'prod-004',
-        name: 'Coffee Maker',
-        category: 'Home',
-        salesCount: 287,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 42,
-        price: 89.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-005',
-        name: 'Bluetooth Speaker',
-        category: 'Electronics',
-        salesCount: 512,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 78,
-        price: 79.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-006',
-        name: 'Fitness Tracker',
-        category: 'Fitness',
-        salesCount: 176,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 0,
-        price: 59.99,
-        status: 'out-stock',
-    },
-];
+// const category: Product[] = [
+//     {
+//         id: 'prod-001',
+//         name: 'Wireless Headphones',
+//         category: 'Electronics',
+//         salesCount: 342,
+//         image: '/placeholder.jpg?height=40&width=40',
+//         stock: 56,
+//         price: 129.99,
+//         status: 'in-stock',
+//     },
+//     {
+//         id: 'prod-002',
+//         name: 'Smart Watch',
+//         category: 'Electronics',
+//         salesCount: 189,
+//         image: '/placeholder.jpg?height=40&width=40',
+//         stock: 23,
+//         price: 249.99,
+//         status: 'in-stock',
+//     },
+//     {
+//         id: 'prod-003',
+//         name: 'Yoga Mat',
+//         category: 'Fitness',
+//         salesCount: 421,
+//         image: '/placeholder.jpg?height=40&width=40',
+//         stock: 0,
+//         price: 39.99,
+//         status: 'out-stock',
+//     },
+//     {
+//         id: 'prod-004',
+//         name: 'Coffee Maker',
+//         category: 'Home',
+//         salesCount: 287,
+//         image: '/placeholder.jpg?height=40&width=40',
+//         stock: 42,
+//         price: 89.99,
+//         status: 'in-stock',
+//     },
+//     {
+//         id: 'prod-005',
+//         name: 'Bluetooth Speaker',
+//         category: 'Electronics',
+//         salesCount: 512,
+//         image: '/placeholder.jpg?height=40&width=40',
+//         stock: 78,
+//         price: 79.99,
+//         status: 'in-stock',
+//     },
+//     {
+//         id: 'prod-006',
+//         name: 'Fitness Tracker',
+//         category: 'Fitness',
+//         salesCount: 176,
+//         image: '/placeholder.jpg?height=40&width=40',
+//         stock: 0,
+//         price: 59.99,
+//         status: 'out-stock',
+//     },
+// ];
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<CategoryItem>[] = [
     {
         accessorKey: 'image',
         header: 'Image',
-        cell: ({ row }) => (
-            <div className="flex items-center justify-center">
-                <img
-                    src={row.getValue('image') || '/placeholder.jpg'}
-                    alt={row.getValue('name')}
-                    width={40}
-                    height={40}
-                    className="rounded-md object-cover"
-                />
-            </div>
-        ),
+        cell: ({ row }) => {
+            const imagePath = row.original.image.startsWith('categories/') ? `/storage/${row.original.image}` : row.original.image;
+            return (
+                <div className="flex items-center justify-center">
+                    <img
+                        src={imagePath}
+                        alt={row.getValue('name')}
+                        width={40}
+                        height={40}
+                        className="rounded-md object-cover"
+                    />
+                </div>
+            )
+        },
         enableSorting: false,
     },
     {
@@ -144,65 +147,19 @@ export const columns: ColumnDef<Product>[] = [
         cell: ({ row }) => <div className="font-medium">{row.getValue('name')}</div>,
     },
     {
-        accessorKey: 'price',
+        accessorKey: 'description',
         header: ({ column }) => {
             return (
                 <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Price
+                    Description
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
         },
-        cell: ({ row }) => {
-            const price = Number.parseFloat(row.getValue('price'));
-            const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            }).format(price);
+        cell: ({ row }) => <div className="font-medium">{row.getValue('description')}</div>,
+    },
 
-            return <div>{formatted}</div>;
-        },
-    },
-    {
-        accessorKey: 'salesCount',
-        header: ({ column }) => {
-            return (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Sales Count
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => <div className="text-center">{row.getValue('salesCount')}</div>,
-    },
-    {
-        id: 'totalSales',
-        header: 'Total Sales',
-        cell: ({ row }) => {
-            const price = Number.parseFloat(row.getValue('price'));
-            const salesCount = Number.parseInt(row.getValue('salesCount'));
-            const totalSales = price * salesCount;
 
-            const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            }).format(totalSales);
-
-            return <div>USD {formatted}</div>;
-        },
-    },
-    {
-        accessorKey: 'category',
-        header: 'Suppliers',
-        cell: ({ row }) => {
-            const id = row.original.id;
-            return (
-                <Button variant="outline" size="sm">
-                    <Link href={`$${id}`}>View Suppliers</Link>
-                </Button>
-            );
-        },
-    },
     {
         id: 'actions',
         header: 'Actions',
@@ -237,10 +194,8 @@ export default function CatgoriesDataTable({categories}:{categories:CategoryItem
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [images, setImages] = useState([]);
 
-    console.log("CATEGORIES LIST: ", categories)
-
     const table = useReactTable({
-        data: category,
+        data: categories,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -269,7 +224,7 @@ export default function CatgoriesDataTable({categories}:{categories:CategoryItem
 
     const handleDeleteSelected = () => {
         // In a real application, you would delete the selected rows here
-        console.log('Deleting selected products:', table.getFilteredSelectedRowModel().rows);
+        console.log('Deleting selected categories:', table.getFilteredSelectedRowModel().rows);
         setShowDeleteDialog(false);
         setRowSelection({});
     };
@@ -281,11 +236,8 @@ export default function CatgoriesDataTable({categories}:{categories:CategoryItem
             return {
                 ID: rowData.id,
                 Name: rowData.name,
-                Category: rowData.category,
-                Status: rowData.status,
-                Stock: rowData.stock,
-                'Sales Count': rowData.salesCount,
-                Price: `$${rowData.price.toFixed(2)}`,
+                Description: rowData.description,
+                Image: rowData.image,
             };
         });
 
@@ -294,10 +246,10 @@ export default function CatgoriesDataTable({categories}:{categories:CategoryItem
 
         // Create workbook
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Products');
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Categories');
 
         // Generate Excel file and trigger download
-        XLSX.writeFile(workbook, 'products.xlsx');
+        XLSX.writeFile(workbook, 'categories.xlsx');
     };
 
     const { data, setData, post, processing, errors, reset } = useForm<Required<CreateCategoryItem>>({
