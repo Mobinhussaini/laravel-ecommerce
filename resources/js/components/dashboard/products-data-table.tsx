@@ -32,98 +32,115 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Link } from '@inertiajs/react';
+import { Link, router, useForm } from '@inertiajs/react';
 import * as XLSX from 'xlsx';
+import { CreateProductItem, Product } from '@/types/product';
+import InputError from '../input-error';
+import { Textarea } from '../ui/textarea';
+import { DropzoneFileInput } from '../form-inputs/image-uploads';
+import { toast } from 'sonner';
 
 export type Product = {
     id: string;
     name: string;
     category: string;
-    salesCount: number;
-    image: string;
-    stock: number;
+    image: string
     price: number;
     status: 'in-stock' | 'out-stock';
 };
 
-const data: Product[] = [
+const products: Product[] = [
     {
         id: 'prod-001',
         name: 'Wireless Headphones',
         category: 'Electronics',
-        salesCount: 342,
+        description: "",
         image: '/placeholder.jpg?height=40&width=40',
-        stock: 56,
-        price: 129.99,
-        status: 'in-stock',
     },
-    {
-        id: 'prod-002',
-        name: 'Smart Watch',
-        category: 'Electronics',
-        salesCount: 189,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 23,
-        price: 249.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-003',
-        name: 'Yoga Mat',
-        category: 'Fitness',
-        salesCount: 421,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 0,
-        price: 39.99,
-        status: 'out-stock',
-    },
-    {
-        id: 'prod-004',
-        name: 'Coffee Maker',
-        category: 'Home',
-        salesCount: 287,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 42,
-        price: 89.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-005',
-        name: 'Bluetooth Speaker',
-        category: 'Electronics',
-        salesCount: 512,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 78,
-        price: 79.99,
-        status: 'in-stock',
-    },
-    {
-        id: 'prod-006',
-        name: 'Fitness Tracker',
-        category: 'Fitness',
-        salesCount: 176,
-        image: '/placeholder.jpg?height=40&width=40',
-        stock: 0,
-        price: 59.99,
-        status: 'out-stock',
-    },
+    // {
+    //     id: 'prod-002',
+    //     name: 'Smart Watch',
+    //     category: 'Electronics',
+
+    //     image: '/placeholder.jpg?height=40&width=40',
+    //     price: 249.99,
+    //     status: 'in-stock',
+    // },
+    // {
+    //     id: 'prod-003',
+    //     name: 'Yoga Mat',
+    //     category: 'Fitness',
+
+    //     image: '/placeholder.jpg?height=40&width=40',
+    //     price: 39.99,
+    //     status: 'out-stock',
+    // },
+    // {
+    //     id: 'prod-004',
+    //     name: 'Coffee Maker',
+    //     category: 'Home',
+
+    //     image: '/placeholder.jpg?height=40&width=40',
+    //     price: 89.99,
+    //     status: 'in-stock',
+    // },
+    // {
+    //     id: 'prod-005',
+    //     name: 'Bluetooth Speaker',
+    //     category: 'Electronics',
+
+    //     image: '/placeholder.jpg?height=40&width=40',
+    //     price: 79.99,
+    //     status: 'in-stock',
+    // },
+    // {
+    //     id: 'prod-006',
+    //     name: 'Fitness Tracker',
+    //     category: 'Fitness',
+
+    //     image: '/placeholder.jpg?height=40&width=40',
+    //     price: 59.99,
+    //     status: 'out-stock',
+    // },
 ];
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<CreateProductItem>[] = [
     {
         accessorKey: 'image',
         header: 'Image',
-        cell: ({ row }) => (
-            <div className="flex items-center justify-center">
-                <img
-                    src={row.getValue('image') || '/placeholder.jpg'}
-                    alt={row.getValue('name')}
-                    width={40}
-                    height={40}
-                    className="rounded-md object-cover"
-                />
-            </div>
-        ),
+        cell: ({ row }) => {
+            const imagePath = row.original.image || '/placeholder.jpg';
+            return (
+                <div className="flex items-center justify-center">
+                    <img
+                        src={imagePath}
+                        alt={row.getValue('name')}
+                        width={40}
+                        height={40}
+                        className="rounded-md object-cover"
+                    />
+                </div>
+            )
+        },
+        enableSorting: false,
+    },
+    {
+        accessorKey: 'galary',
+        header: 'Galary',
+        cell: ({ row }) => {
+            const galaryPath = row.original.galary || '/placeholder.jpg';
+            return (
+                <div className="flex items-center justify-center">
+                    <img
+                        src={galaryPath}
+                        alt={row.getValue('name')}
+                        width={40}
+                        height={40}
+                        className="rounded-md object-cover"
+                    />
+                </div>
+            )
+        },
         enableSorting: false,
     },
     {
@@ -138,54 +155,7 @@ export const columns: ColumnDef<Product>[] = [
         },
         cell: ({ row }) => <div className="font-medium">{row.getValue('name')}</div>,
     },
-    {
-        accessorKey: 'price',
-        header: ({ column }) => {
-            return (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Price
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => {
-            const price = Number.parseFloat(row.getValue('price'));
-            const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            }).format(price);
 
-            return <div>{formatted}</div>;
-        },
-    },
-    {
-        accessorKey: 'salesCount',
-        header: ({ column }) => {
-            return (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Sales Count
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => <div className="text-center">{row.getValue('salesCount')}</div>,
-    },
-    {
-        id: 'totalSales',
-        header: 'Total Sales',
-        cell: ({ row }) => {
-            const price = Number.parseFloat(row.getValue('price'));
-            const salesCount = Number.parseInt(row.getValue('salesCount'));
-            const totalSales = price * salesCount;
-
-            const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            }).format(totalSales);
-
-            return <div>USD {formatted}</div>;
-        },
-    },
     {
         accessorKey: 'category',
         header: 'Suppliers',
@@ -230,18 +200,12 @@ export default function ProductsDataTable() {
     const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
     const [showAddDialog, setShowAddDialog] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const [newProduct, setNewProduct] = React.useState<Partial<Product>>({
-        name: '',
-        category: '',
-        price: 0,
-        stock: 0,
-        status: 'in-stock',
-        salesCount: 0,
-        image: '/placeholder.jpg?height=40&width=40',
-    });
+    const [image, setImage]= React.useState();
+    const [galary, setGalary]= React.useState();
+
 
     const table = useReactTable({
-        data,
+        data: products,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -280,12 +244,8 @@ export default function ProductsDataTable() {
         const exportData = table.getFilteredRowModel().rows.map((row) => {
             const rowData = row.original;
             return {
-                ID: rowData.id,
                 Name: rowData.name,
-                Category: rowData.category,
-                Status: rowData.status,
-                Stock: rowData.stock,
-                'Sales Count': rowData.salesCount,
+
                 Price: `$${rowData.price.toFixed(2)}`,
             };
         });
@@ -301,29 +261,43 @@ export default function ProductsDataTable() {
         XLSX.writeFile(workbook, 'products.xlsx');
     };
 
-    const handleAddProduct = () => {
-        // In a real application, you would add the product to your database
-        console.log('Adding new product:', newProduct);
+    // Calculate total value of all products
+    // const totalValue = products.reduce((sum, product) => sum + product.price * product.stock, 0);
+    // const formattedTotalValue = new Intl.NumberFormat('en-US', {
+    //     style: 'currency',
+    //     currency: 'USD',
+    // }).format(totalValue);
 
-        // Reset form and close dialog
-        setNewProduct({
-            name: '',
-            category: '',
-            price: 0,
-            stock: 0,
-            status: 'in-stock',
-            salesCount: 0,
-            image: '/placeholder.jpg?height=40&width=40',
-        });
-        setShowAddDialog(false);
+
+    const { data, setData, post, processing, errors, reset } = useForm<Required<CreateProductItem>>({
+        name: '',
+        slug: '',
+        image: null,
+        galary: null,
+        colors: '',
+        description: '',
+        is_featured: true,
+        price: 0,
+        original_price: 0,
+        features: '',
+        category_id: "",
+    });
+
+    const submit: React.FormEventHandler = (e) => {
+        e.preventDefault();
+        data.image = image[0];
+        data.galary = galary[];
+        console.log(data);
+
+        router.post('/dashboard/products', data, {
+            onFinish: ()=> {
+                reset();
+                toast.success("Product Created SUccessfully!");
+            }
+        })
+
     };
 
-    // Calculate total value of all products
-    const totalValue = data.reduce((sum, product) => sum + product.price * product.stock, 0);
-    const formattedTotalValue = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    }).format(totalValue);
 
     return (
         <Card className="w-full">
@@ -332,7 +306,7 @@ export default function ProductsDataTable() {
                     <div>
                         <h2 className="text-2xl font-bold tracking-tight">Products List</h2>
                         <p className="text-sm text-muted-foreground">
-                            {data.length} items | Total Value: USD {formattedTotalValue}
+                            {products.length} items | Total Value: USD {formattedTotalValue}
                         </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -347,116 +321,74 @@ export default function ProductsDataTable() {
                                 </Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[750px]">
-                                <DialogHeader>
-                                    <DialogTitle>Add New Product</DialogTitle>
-                                    <DialogDescription>Fill in the details to add a new product to your inventory.</DialogDescription>
-                                </DialogHeader>
-                                <div className="grid grid-cols-2 gap-6 py-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="name">Product Name</Label>
-                                        <Input
-                                            id="name"
-                                            value={newProduct.name}
-                                            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                                        />
+                            <form action="" onSubmit={submit}>
+                                    <DialogHeader>
+                                        <DialogTitle>Add New Product</DialogTitle>
+                                    </DialogHeader>
+                                    <div className="grid py-4">
+                                        <div className="grid grid-cols-2 gap-6">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="name">Product Name</Label>
+                                                <Input required id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
+                                                <InputError message={errors.name} className="mt-2" />
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <Label htmlFor="colors">Category Tailwind Colors Class eg: bg-slate-100</Label>
+                                                <Input required id="colors" value={data.colors} onChange={(e) => setData('colors', e.target.value)} />
+                                                <InputError message={errors.colors} className="mt-2" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="price">Price</Label>
+                                                <Input required id="price" value={data.price} onChange={(e) => setData('price', Number(e.target))} />
+                                                <InputError message={errors.price} className="mt-2" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="original_price">Original Price</Label>
+                                                <Input required id="original_price" value={data.original_price} onChange={(e) => setData('original_price', Number(e.target.value))} />
+                                                <InputError message={errors.original_price} className="mt-2" />
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <Label htmlFor="colors">PRICE</Label>
+                                                <Input required id="colors" value={data.colors} onChange={(e) => setData('colors', e.target.value)} />
+                                                <InputError message={errors.colors} className="mt-2" />
+                                            </div>
+                                            <div className="mt-3 space-y-2">
+                                            <Label htmlFor="description">Description</Label>
+                                            <Textarea
+                                                id="description"
+                                                rows={12}
+                                                cols={30}
+                                                value={data.description}
+                                                placeholder="Product description ...."
+                                                onChange={(e) => setData('description', e.target.value)}
+                                            />
+                                            <InputError message={errors.description} className="mt-2" />
+                                        </div>
+                                        </div>
+
+                                        <div className="max-w-4xl py-3">
+                                            <h2 className="mb-3 text-sm">Upload Product Images</h2>
+                                            <div className="rounded border p-3">
+                                                <DropzoneFileInput multiple={false} maxSizeMB={1} onChange={setGalary} />
+                                                <InputError message={errors.image} className="mt-2" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="category">Category</Label>
-                                        <Input
-                                            id="category"
-                                            value={newProduct.category}
-                                            onChange={(e) =>
-                                                setNewProduct({
-                                                    ...newProduct,
-                                                    category: e.target.value,
-                                                })
-                                            }
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="price">Price</Label>
-                                        <Input
-                                            id="price"
-                                            type="number"
-                                            value={newProduct.price}
-                                            onChange={(e) =>
-                                                setNewProduct({
-                                                    ...newProduct,
-                                                    price: Number.parseFloat(e.target.value),
-                                                })
-                                            }
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="stock">Stock</Label>
-                                        <Input
-                                            id="stock"
-                                            type="number"
-                                            value={newProduct.stock}
-                                            onChange={(e) =>
-                                                setNewProduct({
-                                                    ...newProduct,
-                                                    stock: Number.parseInt(e.target.value),
-                                                })
-                                            }
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="salesCount">Sales Count</Label>
-                                        <Input
-                                            id="salesCount"
-                                            type="number"
-                                            value={newProduct.salesCount}
-                                            onChange={(e) =>
-                                                setNewProduct({
-                                                    ...newProduct,
-                                                    salesCount: Number.parseInt(e.target.value),
-                                                })
-                                            }
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="status">Status</Label>
-                                        <Select
-                                            value={newProduct.status}
-                                            onValueChange={(value) =>
-                                                setNewProduct({
-                                                    ...newProduct,
-                                                    status: value as 'in-stock' | 'out-stock',
-                                                })
-                                            }
+                                    <DialogFooter>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => setShowAddDialog(false)}
+                                            className="min-w-32 hover:cursor-pointer hover:bg-gray-300"
                                         >
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select status" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="in-stock">In Stock</SelectItem>
-                                                <SelectItem value="out-stock">Out of Stock</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="supplier">Supplier</Label>
-                                        <Input id="supplier" placeholder="Enter supplier name" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="image">Image URL</Label>
-                                        <Input
-                                            id="image"
-                                            value={newProduct.image}
-                                            onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
-                                            placeholder="Enter image URL"
-                                        />
-                                    </div>
-                                </div>
-                                <DialogFooter>
-                                    <Button variant="outline" onClick={() => setShowAddDialog(false)}>
-                                        Cancel
-                                    </Button>
-                                    <Button type="submit" onClick={handleAddProduct}>
-                                        Add Product
-                                    </Button>
-                                </DialogFooter>
+                                            Cancel
+                                        </Button>
+                                        <Button type="submit" className="min-w-48 bg-blue-600 hover:cursor-pointer hover:bg-blue-800">
+                                            Add New Product
+                                        </Button>
+                                    </DialogFooter>
+                                </form>
                             </DialogContent>
                         </Dialog>
                     </div>

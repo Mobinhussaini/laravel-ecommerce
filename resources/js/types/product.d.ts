@@ -22,6 +22,7 @@ export interface SimilarProduct {
 }
 export interface CreateProductItem {
     name: string;
+    category_id: string;
     slug: string;
     price: number;
     original_price: number;
